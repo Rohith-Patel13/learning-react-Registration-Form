@@ -5,7 +5,6 @@ import RegisterSuccess from './components/RegisterSuccess'
 import './App.css'
 
 const App = () => {
-  console.log('App')
   const [isRegisterFormVisible, setIsRegisterFormVisible] = useState(true)
   return (
     <div className="bg">

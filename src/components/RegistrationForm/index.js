@@ -1,40 +1,44 @@
-// Write your JS code here
-
-// import RegisterSuccess from '../RegisterSuccess/index'
+import {useState} from 'react'
 import './index.css'
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 const RegistrationForm = ({setIsRegisterFormVisible}) => {
+  const [formData, setFormData] = useState({firstName: '', lastName: ''})
+
   const eventHandler = event => {
-    console.log(event.target.value)
+    const {name, value} = event.target
+    setFormData({...formData, [name]: value})
   }
 
   const submitBtnClicked = () => {
-    setIsRegisterFormVisible(false)
+    if (formData.firstName !== '' && formData.lastName !== '')
+      setIsRegisterFormVisible(false)
   }
 
   return (
     <form className="formInputBg">
       <div className="inputContainer">
-        <label
-          className="form-label labelName"
-          htmlFor="nameId"
-          name="firstName"
-        >
+        <label className="form-label labelName" htmlFor="nameId">
           FIRST NAME
         </label>
-        <input className="form-control" id="nameId" onBlur={eventHandler} />
+        <input
+          className="form-control"
+          name="firstName"
+          id="nameId"
+          onBlur={eventHandler}
+        />
       </div>
 
       <div className="inputContainer mt-3">
-        <label
-          className="form-label labelName"
-          htmlFor="lastId"
-          name="lastName"
-        >
+        <label className="form-label labelName" htmlFor="lastId">
           LAST NAME
         </label>
-        <input className="form-control" id="lastId" />
+        <input
+          className="form-control"
+          name="lastName"
+          id="lastId"
+          onBlur={eventHandler}
+        />
       </div>
 
       <div className="submitBtn">
