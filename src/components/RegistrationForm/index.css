@@ -13,3 +13,7 @@
   width: 100%;
   cursor: pointer;
 }
+
+.errorText {
+  color: red;
+}

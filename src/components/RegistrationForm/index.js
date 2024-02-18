@@ -4,13 +4,41 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 const RegistrationForm = ({setIsRegisterFormVisible}) => {
   const [formData, setFormData] = useState({firstName: '', lastName: ''})
+  const [emptyFirst, setEmptyFirst] = useState(false)
+  const [emptyLast, setEmptyLast] = useState(false)
 
   const eventHandler = event => {
     const {name, value} = event.target
     setFormData({...formData, [name]: value})
   }
 
+  const eventHandlerErrorFirst = () => {
+    if (formData.firstName === '') {
+      setEmptyFirst(true)
+    } else {
+      setEmptyFirst(false)
+    }
+  }
+
+  const eventHandlerErrorLast = () => {
+    if (formData.lastName === '') {
+      setEmptyLast(true)
+    } else {
+      setEmptyLast(false)
+    }
+  }
+
   const submitBtnClicked = () => {
+    if (formData.firstName === '' && formData.lastName === '') {
+      setEmptyFirst(true)
+      setEmptyLast(true)
+    }
+    if (formData.firstName === '') {
+      setEmptyFirst(true)
+    }
+    if (formData.lastName === '') {
+      setEmptyLast(true)
+    }
     if (formData.firstName !== '' && formData.lastName !== '')
       setIsRegisterFormVisible(false)
   }
@@ -25,8 +53,10 @@ const RegistrationForm = ({setIsRegisterFormVisible}) => {
           className="form-control"
           name="firstName"
           id="nameId"
-          onBlur={eventHandler}
+          onChange={eventHandler}
+          onBlur={eventHandlerErrorFirst}
         />
+        {emptyFirst && <p className="errorText">Required</p>}
       </div>
 
       <div className="inputContainer mt-3">
@@ -37,19 +67,19 @@ const RegistrationForm = ({setIsRegisterFormVisible}) => {
           className="form-control"
           name="lastName"
           id="lastId"
-          onBlur={eventHandler}
+          onChange={eventHandler}
+          onBlur={eventHandlerErrorLast}
         />
+        {emptyLast && <p className="errorText">Required</p>}
       </div>
 
-      <div className="submitBtn">
-        <button
-          type="button"
-          className="btn btn-danger mt-3"
-          onClick={submitBtnClicked}
-        >
-          Submit
-        </button>
-      </div>
+      <button
+        type="button"
+        className="btn btn-danger mt-3"
+        onClick={submitBtnClicked}
+      >
+        Submit
+      </button>
     </form>
   )
 }
