@@ -1,0 +1,15 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelName {
+  cursor: pointer;
+}
+
+.submitBtn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+}
